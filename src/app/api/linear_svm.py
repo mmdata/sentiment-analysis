@@ -7,6 +7,7 @@ from app.services.linear_svm.train_svm import train_svm
 from app.services.linear_svm.metrics_svm import metrics_svm
 from app.common.training_auth import authorize
 from concurrent.futures import ThreadPoolExecutor
+from app.config import log
 
 router = APIRouter()
 executor = ThreadPoolExecutor(2)
@@ -23,6 +24,7 @@ async def example_basic_auth(username: str = Depends(authorize)):
 @router.post("/svm/train")
 async def train(payload: TrainPayloadSchema) -> Dict:
 
+    log.info("called training endpoint")
     password = payload.password
     ### OPEN NEW THREAD
     executor.submit(train_svm)
