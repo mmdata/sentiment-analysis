@@ -1,0 +1,9 @@
+{
+    "appConfig": {
+        "application_name": "sentiment-analysis",
+        "application_short_name": "SA",
+        "clientIdentifier": "sentiment-analysis",
+        "clientSecret": "",
+        "version": "0.0.0-rc1"
+    }
+}
