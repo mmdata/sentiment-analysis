@@ -4,7 +4,7 @@
 This application implements a simple Machine Learning models to predict the sentiment of a sentence.
 The training data used are the IMDB Movie Review dataset.
 
-# To Do
+### To Do
 - Initialise logger and log messages whenever we train the model or we predict. Maybe reuse the one in config.py
 - write integration tests
 - add gitHub Action
