@@ -3,3 +3,4 @@ __pycache__
 tf_model.h5 
 test-env
 .pytest_cache
+.DS_Store
