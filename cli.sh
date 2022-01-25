@@ -8,6 +8,14 @@ function print_line () {
 
 function build() {
 
+<<<<<<< HEAD
+  if [ ! -e .env ]; then
+    echo "[ERROR] File .env is missing, please add it";
+    exit 1
+  fi
+
+=======
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
   # stop if running
   (docker kill $container_name || :) 
 
@@ -21,10 +29,18 @@ function build() {
 
   # build & run container 
   docker build . -t $container_name 
+<<<<<<< HEAD
+  # This will read the ./env file and export it's values.
+  docker run -d --rm --env-file ./.env -p 8080:8080 --name $container_name $container_name
+  echo 
+  print_line
+  echo "server running on http://localhost:8080/status"
+=======
   docker run -d --rm -p 8080:8080 --name $container_name $container_name
   echo 
   print_line
   echo "server running on http://localhost:8080"
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
   print_line
 }
 
@@ -114,7 +130,11 @@ function run_cli_mode(){
         r)      
             echo "restarting server" 
             docker stop $container_name
+<<<<<<< HEAD
+            docker run -d --rm --env-file ./.env -p 8080:8080 --name $container_name $container_name
+=======
             docker run -d --rm -p 8080:8080 --name $container_name $container_name
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
             echo "done ..."
             ;;
         s)      

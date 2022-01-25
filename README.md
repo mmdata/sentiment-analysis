@@ -1,6 +1,18 @@
 # sentiment-analysis
 
 ## About this Application
+<<<<<<< HEAD
+This application implements different Machine Learning models to predict the sentiment of a sentence.
+The training data used are the IMDB Movie Review dataset.
+
+### Use the CLI
+For common usecases and scripts there is a command line interface (CLI) tool. Notice that the cli assume that you're running on a UNIX based machine. If you're using Windows you will have to change some command (There are comments in the cli.sh file that explain what you should change)
+The application will also need a `.env` file like this in the root of the project:
+``` 
+ENV_VARIABLE_EXAMPLE=222
+```
+This is just to showcase how we can read env variables in docker container. You can verify that it's correctly reading the file when you call the `status` endpoint
+=======
 This application implements a simple Machine Learning models to predict the sentiment of a sentence.
 The training data used are the IMDB Movie Review dataset.
 
@@ -13,6 +25,7 @@ The training data used are the IMDB Movie Review dataset.
 
 ### Use the CLI
 For common usecases and scripts there is a command line interface (CLI) tool. Notice that the cli assume that you're running on a UNIX based machine. If you're using Windows you will have to change some command (There are comments in the cli.sh file that explain what you should change)
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
 
 To start the cli:
 

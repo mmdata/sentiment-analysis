@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+from fastapi import APIRouter, HTTPException, Depends
+from typing import Dict
+=======
 from fastapi import APIRouter, HTTPException, Depends, Request, Header
 from typing import Dict, Optional
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
 from app.models.pydantic_models import TrainPayloadSchema
 from app.models.pydantic_models import PredictPayloadSchema
 from app.services.linear_svm.predict_svm import predict_svm
@@ -7,8 +12,11 @@ from app.services.linear_svm.train_svm import train_svm
 from app.services.linear_svm.metrics_svm import metrics_svm
 from app.common.training_auth import authorize
 from concurrent.futures import ThreadPoolExecutor
+<<<<<<< HEAD
+=======
 from app.config import log
 from app.common.log_settings import initialise_logger
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
 
 router = APIRouter()
 executor = ThreadPoolExecutor(2)
@@ -23,6 +31,13 @@ async def example_basic_auth(username: str = Depends(authorize)):
 
 
 @router.post("/svm/train")
+<<<<<<< HEAD
+async def train(payload: TrainPayloadSchema) -> Dict:
+
+    password = payload.password
+    ### OPEN NEW THREAD
+    executor.submit(train_svm)
+=======
 async def train(
     payload: TrainPayloadSchema,
     request: Request,
@@ -40,6 +55,7 @@ async def train(
     password = payload.password
     ### OPEN NEW THREAD
     executor.submit(train_svm, log)
+>>>>>>> ed4cd6e4b38882817f02420e67e6b9f8cfb8d369
 
     response_object = {"message": "we are training the model"}
     return response_object
