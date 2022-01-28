@@ -8,6 +8,8 @@ function print_line () {
 
 function build() {
 
+  generate_locally=$1
+
   if [ ! -e .env ]; then
     echo "[ERROR] File .env is missing, please add it";
     exit 1
@@ -26,8 +28,12 @@ function build() {
 
   # build & run container 
   docker build . -t $container_name 
-  # This will read the ./env file and export it's values.
-  docker run -d --rm --env-file ./.env -p 8080:8080 --name $container_name $container_name
+  if [ generate_locally ]; then
+    # read the ./env file and sync with local directory (only use to test locally)
+    docker run -d --rm --env-file ./.env -v $PWD/src/data_synced_with_container:/usr/src/app/app/data -p 8080:8080 --name $container_name $container_name
+  else
+    docker run -d --rm -p 8080:8080 --name $container_name $container_name
+  fi
   echo 
   print_line
   echo "server running on http://localhost:8080/status"
@@ -108,7 +114,7 @@ function run_cli_mode(){
     read -p ">>> " action
     case $action in
         b) 
-            build
+            build true 
             ;;
         i)
             run_install_env 

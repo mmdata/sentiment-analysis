@@ -1,7 +1,7 @@
 
 from fastapi import APIRouter, HTTPException, Depends, Request, Header
 from typing import Dict, Optional
-from app.models.pydantic_models import TrainPayloadSchema
+from app.models.pydantic_models import TrainParametersSchema
 from app.models.pydantic_models import PredictPayloadSchema
 from app.services.linear_svm.predict_svm import predict_svm
 from app.services.linear_svm.train_svm import train_svm
@@ -23,15 +23,9 @@ async def example_basic_auth(username: str = Depends(authorize)):
     """
     return {"username": username}
 
-
 @router.post("/svm/train")
-async def train(payload: TrainPayloadSchema) -> Dict:
-
-    password = payload.password
-    ### OPEN NEW THREAD
-    executor.submit(train_svm)
 async def train(
-    payload: TrainPayloadSchema,
+    train_parameters: TrainParametersSchema,
     request: Request,
     x_request_id: Optional[str] = Header(None)) -> Dict:
 
@@ -44,9 +38,8 @@ async def train(
         trace_id=x_request_id,
     )
     log.info(logger_message="train endpoint was called")
-    password = payload.password
     ### OPEN NEW THREAD
-    executor.submit(train_svm, log)
+    executor.submit(train_svm, log, train_parameters)
 
     response_object = {"message": "we are training the model"}
     return response_object

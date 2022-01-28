@@ -42,8 +42,8 @@ def rename_fields(key_list, message_dict, log_record):
 def add_build_info(log_record, build_info):
     if "application_version" not in log_record:
         log_record["application_version"] = build_info['version']
-    if "application_instance" not in log_record:
-        log_record["application_instance"] = os.environ['HOSTNAME']
+    #if "application_instance" not in log_record:
+    #    log_record["application_instance"] = os.environ['HOSTNAME']
     if "application_name" not in log_record:
         log_record["application_name"] = build_info['serviceName']
     return log_record
